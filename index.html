@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Plan Marathon Sub-3h</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f4f4f9; padding: 20px; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #d35400; text-align: center; }
+        .btn { display: block; width: 100%; text-align: center; background: #e67e22; color: white; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; text-decoration: none; margin-bottom: 20px; }
+        .btn:hover { background: #d35400; }
+        .week-card { border-left: 4px solid #e67e22; padding-left: 15px; margin-bottom: 20px; background: #fafafa; padding: 10px; border-radius: 4px; }
+        .session { margin: 8px 0; font-size: 0.95em; }
+        .session span { font-weight: bold; color: #2c3e50; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Plan Marathon Sub-3h (Semaine 4 à 12)</h1>
+    <button class="btn" onclick="generateICS()"> Synchroniser avec Calendrier Apple (.ics)</button>
+
+    <div id="schedule">
+        <div class="week-card">
+            <h3>Semaine 4 - Intensité & Soutien</h3>
+            <div class="session"><span>Mardi :</span> 3km Échauff. + 6x1000m à 3:50/km (recup 1'30) + 2km RAC</div>
+            <div class="session"><span>Mercredi :</span> 12km EF à 5:15/km</div>
+            <div class="session"><span>Jeudi :</span> 3km Échauff. + 3x4km à 4:15/km + 2km RAC</div>
+            <div class="session"><span>Samedi :</span> 8km EF à 5:20/km</div>
+            <div class="session"><span>Dimanche :</span> 22km (12km EF + 8km à 4:15/km + 2km RAC)</div>
+        </div>
+    </div>
+</div>
+
+<script>
+function generateICS() {
+    let icsData = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Mon Plan Marathon Sub3h//FR
+BEGIN:VEVENT
+SUMMARY:Marathon Sub3h - 6x1000m VMA
+DESCRIPTION:3km Échauffement \\n6x1000m à 3:50/km (recup 1'30) \\n2km RAC
+DTSTART:20261006T060000Z
+DTEND:20261006T070000Z
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Marathon Sub3h - Sortie Longue 22km
+DESCRIPTION:12km EF + 8km à 4:15/km + 2km RAC
+DTSTART:20261011T070000Z
+DTEND:20261011T090000Z
+END:VEVENT
+END:VCALENDAR`;
+
+    let blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8;' });
+    let link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.setAttribute('download', 'plan_marathon_sub3h.ics');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+</script>
+
+</body>
+</html>
